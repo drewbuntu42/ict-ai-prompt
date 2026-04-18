@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portia — No Wrong Door | Wichita 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   PORTIA — NO WRONG DOOR
+   Wichita Regional AI Prompt Championship 2026
+   Team: Drew · Benjamin · Ira · Jack · Zachary · Echo
+   ================================================================ */
+:root {
+  --ink:       #1a1714;
+  --cream:     #f5f0e8;
+  --teal:      #0d5c63;
+  --teal-lt:   #1a8a94;
+  --amber:     #d97706;
+  --amber-lt:  #fbbf24;
+  --rust:      #b45309;
+  --red:       #c0392b;
+  --red-dk:    #922b21;
+  --green:     #1a7a4a;
+  --muted:     #6b6560;
+  --rule:      #d6cfc3;
+  --card:      #faf7f2;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Instrument Sans',sans-serif;background:var(--cream);color:var(--ink);font-size:16px;line-height:1.65;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'DM Serif Display',serif;font-weight:400;line-height:1.2}
+.mono{font-family:'DM Mono',monospace}
+
+/* ── EMERGENCY BANNER ── */
+#emergency-banner{display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--red);color:#fff;padding:10px 20px;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.04em;animation:pulseRed 2s ease-in-out infinite}
+#emergency-banner.active{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+@keyframes pulseRed{0%,100%{background:var(--red)}50%{background:var(--red-dk)}}
+.eblink{width:10px;height:10px;border-radius:50%;background:#fff;animation:blink 1s step-start infinite;flex-shrink:0}
+@keyframes blink{50%{opacity:0}}
+.eb-btn{background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.5);color:#fff;padding:3px 10px;cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;white-space:nowrap}
+
+/* ── NAV ── */
+#main-nav{position:sticky;top:0;z-index:100;background:rgba(245,240,232,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:56px;transition:top 0.3s}
+.nav-brand{font-family:'DM Serif Display',serif;font-size:20px;color:var(--teal);display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0}
+.nav-links{display:flex;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:0 14px;height:56px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s}
+.nav-links a:hover{color:var(--teal);border-color:var(--teal)}
+#curveballBtn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--red);color:#fff;border:none;padding:7px 14px;cursor:pointer;border-radius:2px;transition:opacity 0.2s;flex-shrink:0}
+#curveballBtn:hover{opacity:0.85}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--teal);position:relative;display:flex;flex-direction:column;justify-content:center;padding:100px 48px 80px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 50%,rgba(0,0,0,0.3) 0%,transparent 70%),repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(255,255,255,0.015) 40px,rgba(255,255,255,0.015) 41px)}
+.hero>*{position:relative;z-index:1}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--amber-lt);margin-bottom:20px;opacity:0;animation:fadeUp 0.6s ease 0.1s forwards}
+.hero h1{font-size:clamp(54px,9vw,112px);color:#fff;letter-spacing:-0.02em;max-width:900px;opacity:0;animation:fadeUp 0.7s ease 0.2s forwards}
+.hero h1 em{font-style:italic;color:var(--amber-lt)}
+.hero-sub{margin-top:24px;font-size:20px;color:rgba(255,255,255,0.72);max-width:540px;opacity:0;animation:fadeUp 0.7s ease 0.35s forwards}
+.hero-stats{margin-top:48px;display:flex;gap:32px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s ease 0.5s forwards}
+.hstat{border-left:3px solid var(--amber);padding-left:16px}
+.hstat .num{font-family:'DM Serif Display',serif;font-size:38px;color:#fff;display:block}
+.hstat .lbl{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5)}
+.hero-scroll{position:absolute;bottom:32px;left:48px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:10px}
+.hero-scroll::before{content:'';display:block;width:32px;height:1px;background:rgba(255,255,255,0.25)}
+
+/* ── SHARED SECTION CHROME ── */
+.section{max-width:1100px;margin:0 auto;padding:96px 48px}
+.divider{border:none;border-top:1px solid var(--rule)}
+.section-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.section h2{font-size:clamp(32px,4vw,52px);color:var(--teal);margin-bottom:20px}
+.section-lead{font-size:18px;color:var(--muted);max-width:680px;margin-bottom:52px}
+
+/* ── GRIDS ── */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.cell{background:var(--card);padding:28px 24px}
+.cell h4{font-size:17px;color:var(--teal);margin-bottom:8px}
+.cell .icon{font-size:26px;margin-bottom:14px}
+.cell p{font-size:14px;color:var(--muted);line-height:1.6}
+.cell .kpi-num{font-family:'DM Serif Display',serif;font-size:38px;color:var(--teal);display:block;margin-bottom:4px}
+.cell .kpi-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.cell.center{text-align:center}
+
+/* badges */
+.badge{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:2px}
+.badge-teal{background:rgba(13,92,99,0.12);color:var(--teal)}
+.badge-amber{background:rgba(217,119,6,0.12);color:var(--rust)}
+.badge-green{background:rgba(26,122,74,0.12);color:var(--green)}
+.badge-red{background:rgba(192,57,43,0.12);color:var(--red)}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:40px}
+.tbl th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--rule);padding:8px 12px 8px 0;text-align:left;font-weight:500}
+.tbl td{padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .strong{font-weight:600;color:var(--ink)}
+
+/* pull quote */
+.pull-quote{border-left:4px solid var(--amber);padding:18px 28px;background:var(--card);margin:32px 0;font-family:'DM Serif Display',serif;font-size:21px;font-style:italic;color:var(--teal);line-height:1.4}
+
+/* status bar */
+.status-bar{background:var(--card);border:1px solid var(--rule);padding:10px 18px;display:flex;align-items:center;gap:10px;margin-bottom:28px;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)}
+.sdot-live{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulseGreen 2s ease-in-out infinite}
+@keyframes pulseGreen{0%,100%{box-shadow:0 0 0 2px rgba(26,122,74,0.3)}50%{box-shadow:0 0 0 6px rgba(26,122,74,0.08)}}
+.sdot-live.red{background:var(--red);animation:pulseRedDot 1s ease-in-out infinite}
+@keyframes pulseRedDot{0%,100%{box-shadow:0 0 0 2px rgba(192,57,43,0.3)}50%{box-shadow:0 0 0 8px rgba(192,57,43,0.1)}}
+
+/* budget bars */
+.budget-bars{margin-bottom:40px}
+.bb-row{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.bb-lbl{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);width:210px;flex-shrink:0}
+.bb-track{flex:1;height:22px;background:var(--rule);overflow:hidden}
+.bb-fill{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;background:var(--teal);width:0%;transition:width 1.2s cubic-bezier(0.22,1,0.36,1)}
+.bb-fill.amber{background:var(--amber)}
+.bb-fill.lt{background:var(--teal-lt)}
+.bb-fill.rust{background:var(--rust)}
+.bb-fill.green{background:var(--green)}
+.bb-fill.muted{background:var(--muted)}
+.bb-fill span{font-family:'DM Mono',monospace;font-size:10px;color:#fff;white-space:nowrap}
+.bb-amt{font-family:'DM Mono',monospace;font-size:12px;color:var(--ink);width:72px;text-align:right;flex-shrink:0}
+
+/* timeline */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--rule)}
+.tl-phase{position:relative;margin-bottom:44px}
+.tl-phase::before{content:'';position:absolute;left:-28px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--amber);border:2px solid var(--cream);box-shadow:0 0 0 2px var(--amber)}
+.tl-header{display:flex;align-items:baseline;gap:14px;margin-bottom:14px}
+.tl-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber)}
+.tl-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--teal)}
+.phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.phase-item{background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--teal-lt);padding:14px 16px}
+.phase-item h5{font-size:14px;font-weight:600;margin-bottom:3px;color:var(--ink)}
+.phase-item p{font-size:13px;color:var(--muted)}
+
+/* dark card */
+.dark-card{background:var(--teal);color:#fff;padding:52px 48px;position:relative;overflow:hidden;margin-bottom:48px}
+.dark-card::after{content:'PORTIA';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-family:'DM Serif Display',serif;font-size:160px;color:rgba(255,255,255,0.04);pointer-events:none;white-space:nowrap}
+.dark-card h3{font-size:34px;color:#fff;margin-bottom:10px}
+.dark-card .sub{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:32px;max-width:540px}
+.flow-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.flow-col{border:1px solid rgba(255,255,255,0.18);padding:22px 18px}
+.flow-col .step-num{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--amber-lt);margin-bottom:10px}
+.flow-col h5{font-size:15px;font-weight:600;color:#fff;margin-bottom:6px}
+.flow-col p{font-size:13px;color:rgba(255,255,255,0.58);line-height:1.5}
+
+/* tagline block */
+.tagline-block{background:var(--ink);padding:64px 48px;text-align:center}
+.tagline-block .tag{font-family:'DM Serif Display',serif;font-size:clamp(28px,5vw,58px);line-height:1.15;letter-spacing:-0.02em;color:#fff}
+.tagline-block .tag em{color:var(--amber-lt);font-style:italic}
+.tagline-block .sub{margin-top:16px;font-size:15px;color:rgba(255,255,255,0.45);font-family:'DM Mono',monospace;letter-spacing:0.06em}
+
+/* team */
+.team-cell{background:var(--card);padding:26px 22px}
+.team-initial{width:38px;height:38px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:10px}
+.team-name{font-weight:600;font-size:15px;color:var(--ink);margin-bottom:3px}
+.team-role{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber)}
+
+/* placeholder */
+.placeholder{border:2px dashed var(--rule);background:rgba(245,240,232,0.5);padding:48px 32px;margin-bottom:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:200px;gap:12px}
+.placeholder .ph-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--rule)}
+.placeholder .ph-owner{font-family:'DM Serif Display',serif;font-size:28px;color:var(--teal);opacity:0.35}
+.placeholder .ph-hint{font-size:13px;color:var(--muted);max-width:400px;line-height:1.5}
+
+/* ── EMERGENCY ── */
+#emergency-section{display:none;background:#130d0c}
+#emergency-section.active{display:block}
+.emerg-header{background:var(--red);padding:28px 48px;display:flex;align-items:center;gap:20px}
+.emerg-header h2{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:#fff;font-weight:500}
+.emerg-body{max-width:1100px;margin:0 auto;padding:64px 48px}
+.emerg-body h3{font-size:36px;color:var(--amber-lt);margin-bottom:6px}
+.emerg-lead{font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:44px}
+.incident-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:44px}
+.incident{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-left:4px solid var(--red);padding:22px 18px}
+.incident.warn{border-left-color:var(--amber)}
+.incident.info{border-left-color:var(--teal-lt)}
+.incident h5{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.incident.warn h5{color:var(--amber-lt)}
+.incident.info h5{color:var(--teal-lt)}
+.incident p{font-size:14px;color:rgba(255,255,255,0.68);line-height:1.55}
+.action-list{counter-reset:action;list-style:none;margin-bottom:44px}
+.action-list li{counter-increment:action;display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
+.action-list li::before{content:counter(action,decimal-leading-zero);font-family:'DM Mono',monospace;font-size:20px;color:var(--amber);flex-shrink:0;line-height:1}
+.action-title{font-weight:600;font-size:15px;color:#fff;margin-bottom:4px}
+.action-detail{font-size:13px;color:rgba(255,255,255,0.5)}
+.cap-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:44px}
+.cap-tbl th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);border-bottom:1px solid rgba(255,255,255,0.08);padding:8px 10px 8px 0;text-align:left}
+.cap-tbl td{padding:11px 10px 11px 0;border-bottom:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.7)}
+.cap-tbl .org{color:#fff;font-weight:600}
+.sdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.sdot.g{background:#2ecc71}.sdot.y{background:var(--amber-lt)}.sdot.r{background:var(--red)}
+.emerg-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber-lt);margin-bottom:16px}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(255,255,255,0.4);padding:44px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-brand{font-family:'DM Serif Display',serif;font-size:22px;color:#fff}
+.footer-meta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.07em;text-align:right;line-height:1.9}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  #main-nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero{padding:90px 24px 72px}
+  .section{padding:64px 24px}
+  .grid-3,.grid-4,.flow-cols,.phase-grid,.incident-grid{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column;gap:16px}
+  .emerg-header{padding:20px 24px}
+  .emerg-body{padding:40px 24px}
+  footer{flex-direction:column}
+  .footer-meta{text-align:left}
+  .dark-card{padding:36px 24px}
+  .tagline-block{padding:48px 24px}
+  .bb-lbl{width:120px;font-size:11px}
+  #curveballBtn{font-size:10px;padding:5px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- ====================================================
+  PORTIA SYSTEM JS
+  - Polls /system-status every 30s
+  - Auto-activates emergency mode when API flips
+  - Manual toggle for demo purposes
+  - Scroll-reveal for .reveal elements
+  - Animates budget bars on scroll into view
+===================================================== -->
+<script>
+(function(){
+  var POLL_URL='https://aipromptchamp.com/api/challenge/wich/system-status';
+  var emergencyActive=false;
+
+  function activateEmergency(reason){
+    if(emergencyActive)return;
+    emergencyActive=true;
+    document.getElementById('main-nav').style.top='44px';
+    document.getElementById('emergency-banner').classList.add('active');
+    document.getElementById('emergency-section').classList.add('active');
+    document.getElementById('curveballBtn').textContent='⚡ Emergency Active';
+    document.getElementById('curveballBtn').style.background='#7b241c';
+    var dot=document.getElementById('system-status-dot');
+    if(dot)dot.classList.add('red');
+    var txt=document.getElementById('system-status-text');
+    if(txt)txt.textContent='EMERGENCY MODE ACTIVE — '+(reason||'system-status: emergency');
+    console.log('[Portia] Emergency activated:',reason);
+  }
+
+  function deactivateEmergency(){
+    emergencyActive=false;
+    document.getElementById('main-nav').style.top='0';
+    document.getElementById('emergency-banner').classList.remove('active');
+    document.getElementById('emergency-section').classList.remove('active');
+    document.getElementById('curveballBtn').textContent='⚡ Curveball Mode';
+    document.getElementById('curveballBtn').style.background='';
+    var dot=document.getElementById('system-status-dot');
+    if(dot)dot.classList.remove('red');
+    var txt=document.getElementById('system-status-text');
+    if(txt)txt.textContent='System status: Normal — polling every 30s';
+  }
+
+  function poll(){
+    fetch(POLL_URL,{cache:'no-store'})
+      .then(function(r){return r.json()})
+      .then(function(d){
+        var mode=d&&(d.mode||d.status||d.system_mode||'');
+        if(typeof mode==='string'&&mode.toLowerCase().indexOf('emergency')!==-1){
+          activateEmergency(d.message||d.reason||mode);
+        }
+      })
+      .catch(function(){});
+  }
+
+  window.toggleEmergency=function(){
+    if(emergencyActive){deactivateEmergency()}
+    else{activateEmergency('Manual — curveball demo');scrollToEmergency()}
+  };
+  window.scrollToEmergency=function(){
+    var el=document.getElementById('emergency-section');
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  };
+
+  document.addEventListener('DOMContentLoaded',function(){
+    // poll
+    poll();setInterval(poll,30000);
+
+    // scroll-reveal
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
+    },{threshold:0.08});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+    // budget bar animation
+    var barIO=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.querySelectorAll('.bb-fill[data-w]').forEach(function(b){b.style.width=b.dataset.w});
+          barIO.unobserve(e.target);
+        }
+      });
+    },{threshold:0.2});
+    document.querySelectorAll('.budget-bars').forEach(function(el){barIO.observe(el)});
+  });
+})();
+</script>
+
+<!-- ====================================================  EMERGENCY BANNER  ==== -->
+<div id="emergency-banner">
+  <div class="eblink"></div>
+  ⚠ EMERGENCY MODE — Open Door offline · 60+ displaced · CrossRoads at capacity · DCF 72-hr alert
+  <button class="eb-btn" onclick="scrollToEmergency()">VIEW RESPONSE →</button>
+</div>
+
+<!-- ====================================================  NAV  ==== -->
+<nav id="main-nav">
+  <a class="nav-brand" href="#top"><span class="nav-dot"></span> Portia</a>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#architect">Architect</a></li>
+    <li><a href="#oracle">Oracle</a></li>
+    <li><a href="#muse">Muse</a></li>
+    <li><a href="#emergency-section">Emergency</a></li>
+    <li><a href="#team">Team</a></li>
+  </ul>
+  <button id="curveballBtn" onclick="toggleEmergency()">⚡ Curveball Mode</button>
+</nav>
+
+<!-- ====================================================  HERO  ==== -->
+<section class="hero" id="top">
+  <div class="hero-eyebrow">Wichita Regional AI Prompt Championship 2026 — Full Stack Submission</div>
+  <h1>No Wrong<br><em>Door.</em></h1>
+  <p class="hero-sub">A 90-day AI-coordinated pilot connecting Wichita's unhoused neighbors and foster youth to housing, services, and lasting stability — using what already exists.</p>
+  <div class="hero-stats">
+    <div class="hstat"><span class="num">$500K</span><span class="lbl">Pilot Budget</span></div>
+    <div class="hstat"><span class="num">90</span><span class="lbl">Days</span></div>
+    <div class="hstat"><span class="num">8+</span><span class="lbl">Partner Orgs</span></div>
+    <div class="hstat"><span class="num">150+</span><span class="lbl">Lives Impacted</span></div>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+<!-- ====================================================  PROBLEM  ==== -->
+<hr class="divider">
+<section class="section" id="problem">
+  <div class="section-tag">00 — Problem Understanding</div>
+  <h2>Two populations. One broken handoff system.</h2>
+  <p class="section-lead">Wichita's safety net has capable organizations — but no shared nervous system. People fall through the cracks not because help doesn't exist, but because the doors don't talk to each other.</p>
+
+  <div class="status-bar reveal">
+    <div class="sdot-live" id="system-status-dot"></div>
+    <span id="system-status-text">System status: Normal — polling aipromptchamp.com/api every 30s</span>
+  </div>
+
+  <div class="grid-3 reveal" style="margin-bottom:48px">
+    <div class="cell">
+      <div class="icon">🏚️</div>
+      <h4>Chronic Homelessness</h4>
+      <p>Individuals cycle through shelters, ERs, and jails without ever reaching stable housing. Each system handoff is a chance to lose them entirely.</p>
+    </div>
+    <div class="cell">
+      <div class="icon">🧒</div>
+      <h4>Aging-Out Foster Youth</h4>
+      <p>Young adults exiting DCF at 18 often have no housing plan, no ID, and no knowledge of what's available. The cliff is immediate and steep.</p>
+    </div>
+    <div class="cell">
+      <div class="icon">🔀</div>
+      <h4>Fragmented Coordination</h4>
+      <p>Second Light, Open Door, CrossRoads, BRIDGES, H.O.T., NEXTenant, and DCF IL each do excellent work — but in silos with no shared intake or referral layer.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:20px;color:var(--teal);margin-bottom:18px">Existing Assets — Wichita's Network</h3>
+  <table class="tbl reveal">
+    <thead><tr><th>Organization</th><th>Primary Role</th><th>Population</th><th>Key Gap</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Second Light</td><td>Youth transitional housing</td><td>Foster youth, 18–24</td><td>No real-time bed availability</td></tr>
+      <tr><td class="strong">Open Door</td><td>Highest-volume walk-in intake</td><td>All unhoused</td><td>Single point of failure — no backup</td></tr>
+      <tr><td class="strong">H.O.T.</td><td>Street outreach, engagement</td><td>Chronically unhoused</td><td>Paper intake, no routing logic</td></tr>
+      <tr><td class="strong">CrossRoads</td><td>Emergency shelter</td><td>Adults, families</td><td>Frequently at capacity, no diversion</td></tr>
+      <tr><td class="strong">BRIDGES</td><td>Transitional housing + case mgmt</td><td>Youth + young adults</td><td>Waitlist with no priority scoring</td></tr>
+      <tr><td class="strong">DCF Independent Living</td><td>Foster youth services to 21</td><td>Foster youth</td><td>Disconnected from community housing</td></tr>
+      <tr><td class="strong">City ID Program</td><td>ID + vital documents</td><td>All barriers populations</td><td>Low awareness, no proactive outreach</td></tr>
+      <tr><td class="strong">NEXTenant</td><td>Landlord partnerships, rapid rehousing</td><td>Ready-to-rent individuals</td><td>No referral pipeline from shelters</td></tr>
+      <tr><td class="strong">Housing First / RRH</td><td>Permanent housing placement</td><td>Chronically unhoused</td><td>No triage scoring to prioritize cases</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pull-quote reveal">"No one is managing the network. Every organization manages its own door — but no one manages the space between them."</div>
+</section>
+
+<!-- ====================================================  ARCHITECT  (Benjamin Schubert)  ==== -->
+<hr class="divider">
+<section class="section" id="architect">
+  <div class="section-tag">01 — Architect Track · Benjamin Schubert</div>
+  <h2>The Product &amp; Tool</h2>
+  <p class="section-lead">Portia is the AI coordination layer that sits between Wichita's existing organizations — a shared intake router, real-time bed registry, and case triage engine.</p>
+
+  <!-- ARCHITECT CONTENT — Benjamin Schubert -->
+
+  <div class="dark-card reveal">
+    <h3>Meet Portia — Your Personal Navigator</h3>
+    <p class="sub">A multilingual AI assistant that meets people where they are, builds a secure profile, and connects them to exactly the right services — no wrong answers, no wrong door.</p>
+    <div class="flow-cols">
+      <div class="flow-col">
+        <div class="step-num">STEP 01 — CONVERSATION</div>
+        <h5>Talk in Any Language</h5>
+        <p>Portia opens a natural-language conversation in the user's preferred language. She asks for name, date of birth, current situation, and immediate needs — adapting her questions based on each answer.</p>
+      </div>
+      <div class="flow-col">
+        <div class="step-num">STEP 02 — PROFILE + FORMS</div>
+        <h5>Fill Forms Automatically</h5>
+        <p>Once Portia has the user's information, she offers to auto-fill applications for relevant shelters, programs, and services. The user reviews and approves. One conversation does the work of a dozen intake forms.</p>
+      </div>
+      <div class="flow-col">
+        <div class="step-num">STEP 03 — YOUR CARD</div>
+        <h5>A Physical Key to Everything</h5>
+        <p>Profile saved securely. User visits any partner municipal site to receive a weather-proof plastic card with a QR code linked to their profile. They set their own PIN — 2FA built in.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-size:20px;color:var(--teal);margin-bottom:18px" class="reveal">How the Decision Tree Works</h3>
+  <div class="grid-3 reveal" style="margin-bottom:48px">
+    <div class="cell">
+      <div class="icon">🌳</div>
+      <h4>Adaptive Questioning</h4>
+      <p>Portia follows a structured decision tree that branches based on each response. A foster youth aging out of DCF gets different questions than someone experiencing a first housing crisis — and different resources.</p>
+    </div>
+    <div class="cell">
+      <div class="icon">🌐</div>
+      <h4>Multilingual by Default</h4>
+      <p>Full support for Spanish, Vietnamese, Somali, and other languages common in Wichita's unhoused population. Language is detected automatically or chosen at first prompt. No interpreter required.</p>
+    </div>
+    <div class="cell">
+      <div class="icon">📋</div>
+      <h4>Live Resource Updates</h4>
+      <p>Portia knows what's available right now. If a shelter has moved, closed, or reached capacity, she knows. No more sending someone across town to a full building or a relocated address.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:20px;color:var(--teal);margin-bottom:18px" class="reveal">The Card System — Portia in Your Pocket</h3>
+  <div class="grid-2 reveal" style="margin-bottom:48px">
+    <div class="cell" style="border-left:4px solid var(--teal)">
+      <h4>🪪 The Portia Card</h4>
+      <p style="margin-bottom:12px">A weatherproof, plastic ID-sized card issued at any partner municipal site — City Hall, Open Door, the public library. It has one thing on it: a QR code.</p>
+      <p>Scanning the QR code opens Portia, who asks for the user's PIN. Once authenticated, Portia loads their saved profile and picks up the conversation where they left off — surfacing what's changed, what's new, and what they need to do next.</p>
+      <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+        <span class="badge badge-teal">Weather-proof plastic</span>
+        <span class="badge badge-teal">QR + PIN (2FA)</span>
+        <span class="badge badge-green">Issued same-day</span>
+      </div>
+    </div>
+    <div class="cell" style="border-left:4px solid var(--rust)">
+      <h4>🚨 The Hermes Card — Emergency Medical</h4>
+      <p style="margin-bottom:12px">A second card, issued optionally, carries emergency medical information. When scanned by EMS or an ER nurse, it opens <em>Hermes</em> — a separate, read-only AI assistant designed for first responders.</p>
+      <p>Hermes surfaces medications, allergies, conditions, emergency contacts, and any special instructions — without requiring the user to be conscious or able to communicate. No PIN required for the medical track.</p>
+      <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+        <span class="badge badge-red">EMS / ER access</span>
+        <span class="badge badge-amber">No PIN (read-only)</span>
+        <span class="badge badge-red">User-controlled content</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-size:20px;color:var(--teal);margin-bottom:18px" class="reveal">Technical Architecture</h3>
+  <table class="tbl reveal">
+    <thead><tr><th>Layer</th><th>Component</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Conversation</td><td>AI assistant with decision tree logic</td><td>Multilingual, adaptive questioning, context-aware follow-ups</td></tr>
+      <tr><td class="strong">Profile Storage</td><td>Structured markup file per user</td><td>Stored on secure server; user owns their data; exportable</td></tr>
+      <tr><td class="strong">Form Auto-Fill</td><td>Partner form integrations</td><td>Shelter applications, program enrollments, benefit forms</td></tr>
+      <tr><td class="strong">QR Card</td><td>Unique URL + PIN auth</td><td>Printed at partner sites; links to user profile; 2FA via PIN</td></tr>
+      <tr><td class="strong">Hermes (emergency)</td><td>Read-only medical AI layer</td><td>Separate QR, no PIN, first-responder UI, user-defined content</td></tr>
+      <tr><td class="strong">Resource Feed</td><td>Live availability from partner orgs</td><td>Bed counts, service hours, address updates pushed to Portia in real time</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pull-quote reveal">"One conversation. One card. Every door in Wichita — open."</div>
+</section>
+
+<!-- ====================================================  ORACLE  (Jack Regehr)  ==== -->
+<hr class="divider">
+<section class="section" id="oracle">
+  <div class="section-tag">02 — Oracle Track · Jack Regehr</div>
+  <h2>The Business &amp; Operating Model</h2>
+  <p class="section-lead">A $500K pilot structured to prove unit economics, demonstrate measurable outcomes, and generate the evidence base for a sustainable, city-backed program.</p>
+
+  <!-- ORACLE CONTENT — Jack Regehr -->
+
+  <div class="grid-4 reveal" style="margin-bottom:48px">
+    <div class="cell center"><span class="kpi-num">500</span><span class="kpi-lbl">Cards Issued in 90 Days</span></div>
+    <div class="cell center"><span class="kpi-num">8</span><span class="kpi-lbl">Languages Supported</span></div>
+    <div class="cell center"><span class="kpi-num">&lt;15m</span><span class="kpi-lbl">Avg Time: Intake to Card</span></div>
+    <div class="cell center"><span class="kpi-num">60%</span><span class="kpi-lbl">Target Housing Retention @ 90 Days</span></div>
+  </div>
+
+  <h3 style="font-size:20px;color:var(--teal);margin-bottom:18px">Budget Allocation — $500,000 Pilot</h3>
+  <div class="budget-bars reveal">
+    <div class="bb-row">
+      <span class="bb-lbl">Rapid Rehousing / NEXTenant</span>
+      <div class="bb-track"><div class="bb-fill" data-w="34%" style="width:0%"><span>34%</span></div></div>
+      <span class="bb-amt">$170,000</span>
+    </div>
+    <div class="bb-row">
+      <span class="bb-lbl">Portia Platform (dev + hosting)</span>
+      <div class="bb-track"><div class="bb-fill lt" data-w="22%" style="width:0%"><span>22%</span></div></div>
+      <span class="bb-amt">$110,000</span>
+    </div>
+    <div class="bb-row">
+      <span class="bb-lbl">Case Management (3 FTE, 90 days)</span>
+      <div class="bb-track"><div class="bb-fill amber" data-w="16%" style="width:0%"><span>16%</span></div></div>
+      <span class="bb-amt">$80,000</span>
+    </div>
+    <div class="bb-row">
+      <span class="bb-lbl">Youth Services (BRIDGES / Second Light)</span>
+      <div class="bb-track"><div class="bb-fill rust" data-w="12%" style="width:0%"><span>12%</span></div></div>
+      <span class="bb-amt">$60,000</span>
+    </div>
+    <div class="bb-row">
+      <span class="bb-lbl">Card Printing + Issuance Sites</span>
+      <div class="bb-track"><div class="bb-fill green" data-w="8%" style="width:0%"><span>8%</span></div></div>
+      <span class="bb-amt">$40,000</span>
+    </div>
+    <div class="bb-row">
+      <span class="bb-lbl">City ID + Document Support</span>
+      <div class="bb-track"><div class="bb-fill lt" data-w="4%" style="width:0%"><span>4%</span></div></div>
+      <span class="bb-amt">$20,000</span>
+    </div>
+    <div class="bb-row">
+      <span class="bb-lbl">Evaluation + Contingency</span>
+      <div class="bb-track"><div class="bb-fill muted" data-w="4%" style="width:0%"><span>4%</span></div></div>
+      <span class="bb-amt">$20,000</span>
+    </div>
+  </div>
+
+  <h3 style="font-size:20px;color:var(--teal);margin-bottom:18px;margin-top:8px" class="reveal">Unit Economics</h3>
+  <table class="tbl reveal" style="margin-bottom:48px">
+    <thead><tr><th>Cost Driver</th><th>Unit Cost</th><th>Volume (90 days)</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Card production (weatherproof PVC)</td><td>~$1.50/card</td><td>500 cards</td><td>$750</td></tr>
+      <tr><td class="strong">Card issuance (staff time @ partner sites)</td><td>~$8/card</td><td>500 cards</td><td>$4,000</td></tr>
+      <tr><td class="strong">Portia conversation (AI compute)</td><td>~$0.04/session</td><td>2,000 sessions</td><td>$80</td></tr>
+      <tr><td class="strong">Secure profile hosting (per user/year)</td><td>~$2.40/user/yr</td><td>500 users</td><td>$1,200/yr</td></tr>
+      <tr><td class="strong">Rapid rehousing deposit + first month</td><td>~$1,200/placement</td><td>100 placements</td><td>$120,000</td></tr>
+      <tr><td class="strong">Cost per person fully stabilized</td><td colspan="2"><strong>All-in (tech + services + card)</strong></td><td><strong>~$3,400</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:20px;color:var(--teal);margin-bottom:18px" class="reveal">90-Day Milestone Timeline</h3>
+  <div class="timeline reveal">
+    <div class="tl-phase">
+      <div class="tl-header"><span class="tl-tag">Days 1–30</span><span class="tl-title">Infrastructure &amp; Launch</span></div>
+      <div class="phase-grid">
+        <div class="phase-item"><h5>Portia Platform Live</h5><p>Deploy conversation engine, decision tree, profile storage, and form-fill integrations. Multilingual support active for Spanish and Somali at minimum.</p></div>
+        <div class="phase-item"><h5>Card Issuance Sites Open</h5><p>At least 3 partner sites printing and issuing cards: Open Door, City Hall, and CrossRoads. Staff trained on the 15-minute intake-to-card workflow.</p></div>
+        <div class="phase-item"><h5>Partner MOUs Signed</h5><p>Data-sharing agreements with all 8 orgs. Define shared intake fields, consent language, and form-fill permissions per partner.</p></div>
+        <div class="phase-item"><h5>First 100 Cards Issued</h5><p>Target: 100 profiles created and cards in hand within the first 30 days. Hermes emergency track opt-in offered at issuance.</p></div>
+      </div>
+    </div>
+    <div class="tl-phase">
+      <div class="tl-header"><span class="tl-tag">Days 31–60</span><span class="tl-title">Scale &amp; Optimize</span></div>
+      <div class="phase-grid">
+        <div class="phase-item"><h5>500 Cards Issued</h5><p>H.O.T. outreach workers carry mobile card printers. Cards issued in the field — no municipal visit required for initial issuance.</p></div>
+        <div class="phase-item"><h5>Form-Fill Activation</h5><p>Portia begins auto-filling shelter applications and benefit forms. Track form submission rates and acceptance rates by partner org.</p></div>
+        <div class="phase-item"><h5>Decision Tree Refinement</h5><p>Review conversation drop-off points and routing accuracy. Adjust tree based on real intake data from first 30 days.</p></div>
+        <div class="phase-item"><h5>DCF Youth Fast-Track</h5><p>Portia's DCF aging-out pathway fully operational. Automatic BRIDGES/Second Light priority queue on profile creation for youth 17–21.</p></div>
+      </div>
+    </div>
+    <div class="tl-phase">
+      <div class="tl-header"><span class="tl-tag">Days 61–90</span><span class="tl-title">Evidence &amp; Year 2 Pitch</span></div>
+      <div class="phase-grid">
+        <div class="phase-item"><h5>60-Day Housing Check-Ins</h5><p>Portia proactively re-engages placed users via QR card scan or SMS. Retention data collected automatically through check-in conversation.</p></div>
+        <div class="phase-item"><h5>Outcome Report Published</h5><p>Cards issued, forms filed, placements made, retention rates, cost-per-outcome. Full transparency for City Council and funders.</p></div>
+        <div class="phase-item"><h5>Sustainability Pitch</h5><p>Present to City of Wichita and Sedgwick County. Target: line-item budget allocation. Pursue HUD CoC, ESG, and ARPA continuation funding.</p></div>
+        <div class="phase-item"><h5>Year 2 Scope Defined</h5><p>Expand to sexual assault survivors, individuals with disabilities, and veterans. Hermes emergency track expanded with hospital system partnerships.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2 reveal" style="margin-bottom:48px">
+    <div class="cell" style="border-top:4px solid var(--teal)">
+      <h4>Year 1 — Prove It</h4>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:12px">500 cards. 8 languages. 100+ placements. One coordinated network. Demonstrate that AI-assisted intake + a physical identity card eliminates the coordination gap at a cost cities can sustain.</p>
+      <span class="badge badge-teal">Unhoused Adults</span>&nbsp;
+      <span class="badge badge-teal">Foster Youth (DCF)</span>&nbsp;
+      <span class="badge badge-teal">Wichita Metro</span>
+    </div>
+    <div class="cell" style="border-top:4px solid var(--amber)">
+      <h4>Year 2 — Scale It</h4>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:12px">Expand Portia's decision tree to serve sexual assault survivors, individuals with disabilities, veterans, and other marginalized populations. Hermes emergency track partners with Wesley and Via Christi hospital systems.</p>
+      <span class="badge badge-amber">SA Survivors</span>&nbsp;
+      <span class="badge badge-amber">Disabilities</span>&nbsp;
+      <span class="badge badge-amber">Veterans</span>&nbsp;
+      <span class="badge badge-amber">Hospital Integration</span>
+    </div>
+  </div>
+
+  <div class="placeholder reveal" style="min-height:140px">
+    <div class="ph-label">Jack — Additional Analysis / Dashboard</div>
+    <p class="ph-hint">Add your interactive dashboard, financial model, or intervention logic diagram here.</p>
+  </div>
+</section>
+
+<!-- ====================================================  MUSE  (Ira Dalbom)  ==== -->
+<hr class="divider">
+<section class="section" id="muse">
+  <div class="section-tag">03 — Muse Track · Ira Dalbom</div>
+  <h2>The Brand &amp; Go-to-Market Layer</h2>
+  <p class="section-lead">Portia only works if the people who need it know it exists — and if the organizations running it trust it. Brand is infrastructure too.</p>
+
+  <!-- MUSE CONTENT — Ira Dalbom -->
+
+  <div class="reveal" style="margin-bottom:48px">
+    <div style="position:relative;width:100%;padding-bottom:56.25%;background:var(--ink);overflow:hidden;">
+      <iframe src="https://gamma.app/embed/y623gklkz9wkeus"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+        allow="fullscreen"
+        title="No Wrong Door: Unifying Service Availability for Homeless Individuals">
+      </iframe>
+    </div>
+  </div>
+
+  <div class="grid-3 reveal" style="margin-bottom:48px">
+    <div class="cell" style="border-top:4px solid var(--teal)">
+      <h4>For People in Crisis</h4>
+      <p>The card is dignity in your pocket. It says: <em>you exist, you matter, and we remembered you.</em> Portia speaks your language, asks smart questions, and never makes you start over. One card. Every door.</p>
+    </div>
+    <div class="cell" style="border-top:4px solid var(--amber)">
+      <h4>For Partner Organizations</h4>
+      <p>"Your intake process, except it works." Portia doesn't replace caseworkers — it eliminates the paperwork that buries them. Partners get pre-filled referrals, real-time capacity tools, and clients who arrive ready.</p>
+    </div>
+    <div class="cell" style="border-top:4px solid var(--rust)">
+      <h4>For City &amp; Funders</h4>
+      <p>Every scan, every form, every placement is logged. The City gets a real-time dashboard and a clear cost-per-outcome number to take to the next budget cycle. $500K — with receipts.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:20px;color:var(--teal);margin-bottom:18px" class="reveal">Trust-Building Strategy</h3>
+  <div class="grid-2 reveal" style="margin-bottom:48px">
+    <div class="cell">
+      <h4>🤝 With the People We Serve</h4>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:10px">Trust is the product. Every design decision — the physical card, the PIN, the user-controlled profile — communicates: <em>this is yours, not ours.</em></p>
+      <ul style="font-size:14px;color:var(--muted);padding-left:18px;line-height:1.9">
+        <li>Card issued at trusted community sites, not government offices</li>
+        <li>Portia speaks in the user's language from the first word</li>
+        <li>User controls their profile and can update it anytime</li>
+        <li>No data shared without explicit opt-in per service</li>
+      </ul>
+    </div>
+    <div class="cell">
+      <h4>🏛️ With Partner Organizations</h4>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:10px">Portia makes existing organizations look good. Adoption centers on eliminating administrative burden from day one.</p>
+      <ul style="font-size:14px;color:var(--muted);padding-left:18px;line-height:1.9">
+        <li>Pre-filled intake forms = less work for front-line staff</li>
+        <li>Real-time referrals stop clients arriving at full shelters</li>
+        <li>Shared capacity dashboard available to all MOU partners</li>
+        <li>Each org's branding on Portia referral confirmations</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tagline-block reveal">
+    <div class="tag">One card.<br><em>Every door.</em></div>
+    <div class="sub">Portia — Wichita's Multilingual Housing Navigation Network</div>
+  </div>
+
+  <div class="placeholder reveal" style="min-height:120px;margin-top:48px">
+    <div class="ph-label">Ira — Additional Campaign Materials</div>
+    <p class="ph-hint">Add channel strategy, launch timeline, or additional brand assets here.</p>
+  </div>
+</section>
+
+<!-- ====================================================  EMERGENCY  (Zachary Longhofer)  ==== -->
+<section id="emergency-section">
+  <div class="emerg-header">
+    <div class="eblink"></div>
+    <h2>⚠ Emergency Response Protocol — System Status: Critical</h2>
+  </div>
+  <div class="emerg-body">
+    <h3>Portia Emergency Mode</h3>
+    <p class="emerg-lead">1:00 PM — system-status endpoint flipped to EMERGENCY. Portia detected the crisis automatically and activated the following surge response.</p>
+
+    <!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  ZACHARY — EXPAND OR REPLACE THIS SECTION                   ║
+    ║                                                              ║
+    ║  This section responds to the specific curveball:           ║
+    ║    - Open Door offline 48–72 hrs                            ║
+    ║    - 60+ displaced from severe weather                      ║
+    ║    - CrossRoads at 1/12 beds                                ║
+    ║    - 4 DCF foster youth incoming, 72-hr window              ║
+    ║    - BRIDGES no vacancy                                     ║
+    ║    - 211 Kansas overloaded                                  ║
+    ║                                                              ║
+    ║  CSS: .incident-grid .incident .incident.warn .incident.info ║
+    ║  .action-list .cap-tbl .sdot.g/y/r .emerg-label             ║
+    ║  Prefix new class names with "emerg-" to avoid conflicts.   ║
+    ╚══════════════════════════════════════════════════════════════╝
+    -->
+
+    <div class="incident-grid">
+      <div class="incident">
+        <h5>🔴 Critical — Open Door Offline</h5>
+        <p>Highest-volume walk-in hub offline 48–72 hrs. Portia immediately reroutes all Open Door intake to H.O.T. mobile units and CrossRoads overflow. H.O.T. second van deployed to Open Door's physical location.</p>
+      </div>
+      <div class="incident">
+        <h5>🔴 Critical — 60+ Displaced Incoming</h5>
+        <p>Severe weather event. 60 residents flooding the shelter network. 211 Kansas overloaded. Portia activates pre-authorized surge partners: church overflow network, YMCA emergency beds.</p>
+      </div>
+      <div class="incident warn">
+        <h5>⚠ Warning — CrossRoads at 1/12 Beds</h5>
+        <p>CrossRoads operating at extreme capacity. Portia suspends standard CrossRoads referrals immediately. All new adult intakes routed to surge overflow sites only.</p>
+      </div>
+      <div class="incident warn">
+        <h5>⚠ Warning — 4 Foster Youth, 72-hr Window</h5>
+        <p>DCF IL issuing 4 youth within 72 hours. BRIDGES has zero vacancy. Portia escalates to Second Light emergency intake track and authorizes Sedgwick County emergency housing vouchers.</p>
+      </div>
+      <div class="incident info">
+        <h5>ℹ BRIDGES — Zero Vacancy</h5>
+        <p>BRIDGES case manager notified. 4 DCF youth placed on priority waitlist. Second Light contacted — 2 emergency beds potentially available pending same-day confirmation.</p>
+      </div>
+      <div class="incident info">
+        <h5>ℹ 211 Kansas — Saturated</h5>
+        <p>Portia's real-time capacity feed becomes 211's primary routing source. Portia SMS line (<strong style="color:var(--teal-lt)">316-PORTIA</strong>) activated as direct intake bypass while 211 call volume peaks.</p>
+      </div>
+    </div>
+
+    <div class="emerg-label">Immediate Actions — Next 4 Hours</div>
+    <ul class="action-list">
+      <li><div><div class="action-title">Activate Surge Overflow Network</div><div class="action-detail">Contact pre-authorized overflow partners (Central Christian, First Presbyterian, YMCA Emergency Program). Estimated surge capacity: 45–60 additional beds within 2 hours.</div></div></li>
+      <li><div><div class="action-title">Deploy H.O.T. as Primary Intake Hub</div><div class="action-detail">H.O.T. mobile units become de facto intake while Open Door is offline. Second H.O.T. van deployed to Open Door's usual location. All H.O.T. intake flows through Portia digitally.</div></div></li>
+      <li><div><div class="action-title">Activate Foster Youth Emergency Track</div><div class="action-detail">DCF IL case worker contacted directly. Second Light emergency beds reserved for 2 of 4 youth. NEXTenant youth rapid-rehousing funds authorized for remaining 2 — hotel bridge if needed.</div></div></li>
+      <li><div><div class="action-title">Push Live Capacity Feed to 211</div><div class="action-detail">Portia API feeds real-time bed availability to 211 Kansas. Callers get current, accurate placement options instead of outdated lists, reducing call volume from bad referrals.</div></div></li>
+      <li><div><div class="action-title">Notify All Partner Case Managers</div><div class="action-detail">Automated push notifications to all active case managers: current capacity snapshot, rerouting instructions, emergency protocol PDF. Response acknowledgement tracked in Portia dashboard.</div></div></li>
+      <li><div><div class="action-title">Log All Emergency Diversions</div><div class="action-detail">Every emergency placement, diversion, and unmet need logged in Portia's database in real time. Creates after-action report for City, county officials, and funder review.</div></div></li>
+    </ul>
+
+    <div class="emerg-label">Live Capacity Snapshot — Emergency Mode</div>
+    <table class="cap-tbl">
+      <thead><tr><th>Organization</th><th>Status</th><th>Available</th><th>Emergency Role</th><th>Portia Action</th></tr></thead>
+      <tbody>
+        <tr><td class="org">Open Door</td><td><span class="sdot r"></span>Offline</td><td>0</td><td>Primary hub — offline</td><td>All intake rerouted to H.O.T.</td></tr>
+        <tr><td class="org">CrossRoads</td><td><span class="sdot r"></span>Critical</td><td>1 of 12</td><td>Medical priority only</td><td>Standard referrals suspended</td></tr>
+        <tr><td class="org">BRIDGES</td><td><span class="sdot r"></span>Full</td><td>0</td><td>Youth — no vacancy</td><td>DCF youth escalated to Second Light</td></tr>
+        <tr><td class="org">Second Light</td><td><span class="sdot y"></span>Strained</td><td>2 emerg.</td><td>Foster youth emergency intake</td><td>2 DCF beds reserved, confirming</td></tr>
+        <tr><td class="org">H.O.T. Mobile</td><td><span class="sdot g"></span>Active</td><td>N/A</td><td>Primary intake hub (backup)</td><td>Deployed to Open Door location</td></tr>
+        <tr><td class="org">NEXTenant</td><td><span class="sdot g"></span>Active</td><td>N/A</td><td>Emergency rapid rehousing</td><td>Youth RRH funds unlocked ($8K)</td></tr>
+        <tr><td class="org">Surge Overflow</td><td><span class="sdot y"></span>Activating</td><td>~45–60</td><td>Weather-displaced adults</td><td>Portia coordinating confirmations</td></tr>
+      </tbody>
+    </table>
+
+    <div class="placeholder" style="border-color:rgba(255,255,255,0.12);background:rgba(255,255,255,0.03)">
+      <div class="ph-label" style="color:rgba(255,255,255,0.2)">Zachary — Additional Emergency Content</div>
+      <div class="ph-owner" style="color:rgba(255,255,255,0.15)">Zachary Longhofer</div>
+      <p class="ph-hint" style="color:rgba(255,255,255,0.3)">Add additional emergency response details, communication templates, maps, or protocol specifics here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================  TEAM  ==== -->
+<hr class="divider">
+<section class="section" id="team">
+  <div class="section-tag">Full Stack Team — Portia</div>
+  <h2>Built by Wichita.</h2>
+  <p class="section-lead">A cross-functional team combining product architecture, business modeling, brand strategy, infrastructure, and coordination — competing across all three tracks as a unified Full Stack submission.</p>
+
+  <div class="grid-4 reveal" style="margin-bottom:1px">
+    <div class="team-cell cell">
+      <div class="team-initial">D</div>
+      <div class="team-name">Drew</div>
+      <div class="team-role">Infrastructure Lead · AI Architect</div>
+    </div>
+    <div class="team-cell cell">
+      <div class="team-initial">B</div>
+      <div class="team-name">Benjamin Schubert</div>
+      <div class="team-role">Architect Track</div>
+    </div>
+    <div class="team-cell cell">
+      <div class="team-initial">J</div>
+      <div class="team-name">Jack Regehr</div>
+      <div class="team-role">Oracle Track</div>
+    </div>
+    <div class="team-cell cell">
+      <div class="team-initial">I</div>
+      <div class="team-name">Ira Dalbom</div>
+      <div class="team-role">Muse Track</div>
+    </div>
+  </div>
+  <div class="grid-2 reveal" style="background:var(--rule);border:1px solid var(--rule);border-top:none;gap:1px;margin-bottom:48px">
+    <div class="team-cell cell">
+      <div class="team-initial">Z</div>
+      <div class="team-name">Zachary Longhofer</div>
+      <div class="team-role">Emergency Response · Support</div>
+    </div>
+    <div class="team-cell cell">
+      <div class="team-initial">E</div>
+      <div class="team-name">Echo Waters</div>
+      <div class="team-role">Content · Gap Fill · Polish</div>
+    </div>
+  </div>
+
+  <div class="pull-quote reveal">"The best answer to 'No Wrong Door' is a team that brought every door."</div>
+</section>
+
+<!-- ====================================================  FOOTER  ==== -->
+<footer>
+  <div class="footer-brand">Portia</div>
+  <div class="footer-meta">
+    Wichita Regional AI Prompt Championship 2026<br>
+    Full Stack · Architect + Oracle + Muse<br>
+    <span style="color:rgba(255,255,255,0.2)">portia.drewbuntu.net · Drew · Benjamin · Ira · Jack · Zachary · Echo</span>
+  </div>
+</footer>
+
+</body>
+</html>
